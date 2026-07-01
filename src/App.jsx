@@ -5,7 +5,7 @@ const student = {
   program: "B.Tech in Computer Science and Engineering",
   specialization: "Software Product Engineering",
   university: "A University",
-  initials: "AR"
+  initials: "AR",
 };
 
 const apps = [
@@ -21,21 +21,20 @@ const apps = [
   { title: "Showcase", icon: "showcase", notifications: 0 },
   { title: "Attendance Hub", icon: "calculator", notifications: 0 },
   { title: "Attempts Corner", icon: "chart", notifications: 0 },
-  { title: "Files", icon: "folder", notifications: 0 }
+  { title: "Files", icon: "folder", notifications: 0 },
 ];
 
 function getStudentDisplayName(profile) {
-  return profile.fullName?.trim() || "Student";
+  return profile.name?.trim() || "Student";
 }
 
 function getAppCardClass(app) {
-  return app.notifications === 0 ? "app-crad" : "app-card";
+  return "app-card";
 }
 
 function getNotificationCount(app) {
-  return Number(app.notificationCount || 0);
+  return Number(app.notifications || 0);
 }
-
 function Sidebar() {
   return (
     <aside className="sidebar">
@@ -61,7 +60,10 @@ function ProfileCard() {
         </div>
         <div className="profile-line">
           <span className="mini-icon code-icon"></span>
-          <span>{student.program}<br />({student.specialization})</span>
+          <span>
+            {student.program}
+            <br />({student.specialization})
+          </span>
         </div>
         <div className="profile-line">
           <span className="mini-icon building-icon"></span>
@@ -70,7 +72,10 @@ function ProfileCard() {
       </div>
       <div className="university-card">
         <div className="seal"></div>
-        <div className="uni-text">A<br /><span>UNIVERSITY</span></div>
+        <div className="uni-text">
+          A<br />
+          <span>UNIVERSITY</span>
+        </div>
       </div>
     </section>
   );
@@ -81,7 +86,9 @@ function DayPanel() {
     <section className="day-section">
       <div className="section-title-row">
         <h2>My Day</h2>
-        <a href="#">View Schedule <span>&gt;</span></a>
+        <a href="#">
+          View Schedule <span>&gt;</span>
+        </a>
       </div>
       <div className="empty-day">
         <div className="coffee-cup">
@@ -106,7 +113,9 @@ function AppCard({ app }) {
 
   return (
     <div className={getAppCardClass(app)}>
-      {notificationCount > 0 && <span className="badge">{notificationCount}</span>}
+      {notificationCount > 0 && (
+        <span className="badge">{notificationCount}</span>
+      )}
       <div className="icon-box">
         <AppIcon type={app.icon} />
       </div>
@@ -116,8 +125,7 @@ function AppCard({ app }) {
 }
 
 export default function App() {
-  const visibleApps = apps.slice(0, 10);
-
+  const visibleApps = apps;
   return (
     <div className="shell">
       <Sidebar />
